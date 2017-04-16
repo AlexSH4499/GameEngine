@@ -1,0 +1,125 @@
+# depslib dependency file v1.0
+1450671492 source:c:\users\alejandro\documents\cpp\gameengine\binary tree.c
+	<stdlib.h>
+	<stdio.h>
+
+1491960365 source:c:\users\alejandro\documents\cpp\gameengine\aabb.c
+	"AABB.h"
+	"map.h"
+	"player.h"
+	<stdio.h>
+
+1454589091 c:\users\alejandro\documents\cpp\gameengine\aabb.h
+	"matrices.h"
+	"vectors.h"
+
+1454589106 c:\users\alejandro\documents\cpp\gameengine\matrices.h
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	"vectors.h"
+
+1454589100 c:\users\alejandro\documents\cpp\gameengine\vectors.h
+
+1452585308 source:c:\users\alejandro\documents\cpp\gameengine\bounds.c
+	"bounds.h"
+
+1450815855 c:\users\alejandro\documents\cpp\gameengine\bounds.h
+
+1454589096 source:c:\users\alejandro\documents\cpp\gameengine\camera.c
+	"camera.h"
+	"matrices.h"
+
+1454589103 c:\users\alejandro\documents\cpp\gameengine\camera.h
+	"matrices.h"
+	"vectors.h"
+
+1450815855 source:c:\users\alejandro\documents\cpp\gameengine\collisionboxes.c
+	"physics.h"
+	"collisionBoxes.h"
+
+1453115413 c:\users\alejandro\documents\cpp\gameengine\physics.h
+	"AABB.h"
+	"player.h"
+
+1452585396 c:\users\alejandro\documents\cpp\gameengine\collisionboxes.h
+
+1454589174 source:c:\users\alejandro\documents\cpp\gameengine\controls.c
+	<stdio.h>
+	"SDL.h"
+	"controls.h"
+
+1453117181 c:\users\alejandro\documents\cpp\gameengine\controls.h
+	"vectors.h"
+
+1492044012 source:c:\users\alejandro\documents\cpp\gameengine\main.c
+	<time.h>
+	<stddef.h>
+	"main.h"
+	"camera.h"
+	"controls.h"
+
+1492042257 c:\users\alejandro\documents\cpp\gameengine\main.h
+	<stdio.h>
+	<stdlib.h>
+	"SDL.h"
+	"SDL_image.h"
+	"map.h"
+	"AABB.h"
+	"matrices.h"
+	"camera.h"
+	"physics.h"
+	"player.h"
+
+1458756890 c:\users\alejandro\documents\cpp\gameengine\map.h
+	<stdio.h>
+	"AABB.h"
+	"matrices.h"
+	"vectors.h"
+
+1452582141 c:\users\alejandro\documents\cpp\gameengine\mathematics.h
+	<math.h>
+
+1453115521 source:c:\users\alejandro\documents\cpp\gameengine\map.c
+	<stdlib.h>
+	<stdio.h>
+	"map.h"
+	"vectors.h"
+	"AABB.h"
+
+1457289444 source:c:\users\alejandro\documents\cpp\gameengine\matrices.c
+	"matrices.h"
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
+1453115533 source:c:\users\alejandro\documents\cpp\gameengine\physics.c
+	<math.h>
+	<stddef.h>
+	"physics.h"
+
+1454589077 source:c:\users\alejandro\documents\cpp\gameengine\player.c
+	"player.h"
+	"vectors.h"
+
+1454589088 c:\users\alejandro\documents\cpp\gameengine\player.h
+	"vectors.h"
+	"matrices.h"
+	"AABB.h"
+
+1454589083 source:c:\users\alejandro\documents\cpp\gameengine\vectors.c
+	"vectors.h"
+	<math.h>
+	<stdio.h>
+
+1452597247 source:c:\users\alejandro\documents\cpp\gameengine\time.c
+	"time.h"
+
+1452594643 c:\users\alejandro\documents\cpp\gameengine\time.h
+
+1376159942 c:\sdl\sdl2_image-2.0.0\i686-w64-mingw32\include\sdl2\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
