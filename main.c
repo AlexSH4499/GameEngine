@@ -22,7 +22,118 @@ SDL_Texture* texture = NULL;
 
 SDL_Texture* loadTexture(char* path);
 
- SDL_Rect* gridToUse ;
+SDL_Rect gridToUse[256] ;
+
+dot_struct* dot;
+
+dot_struct initDot()
+{
+    dot_struct dot;
+
+    dot.DOT_HEIGHT = 10;
+    dot.DOT_WIDTH = 10;
+
+    dot.mPosX = 0;
+    dot.mPosY = 0;
+
+    dot.mVelX = 0;
+    dot.mVelY = 0;
+
+      //Set collision box dimension
+      dot.collider.x=dot.mPosX ;
+      dot.collider.y=dot.mPosY ;
+    dot.collider.w = dot.DOT_WIDTH;
+    dot.collider.h = dot.DOT_HEIGHT;
+
+    return dot;
+}
+/*
+void moveDot(SDL_Rect &wall)
+{
+
+    dot.mPosX += dot.mVelX;
+    dot.collider.x = dot.mPosX;
+
+    if( ( dot.mPosX < 0 ) || ( dot.mPosX + dot.DOT_WIDTH > SCREEN_WIDTH ) || checkCollision( dot.collider, wall ) )
+    {
+        //Move back
+        dot.mPosX -= dot.mVelX;
+        dot.collider.x = dot.mPosX;
+    }
+
+        dot.mPosY += dot.mVelY;
+    dot.collider.y = dot.mPosY;
+
+    if( ( dot.mPosY < 0 ) || ( dot.mPosY + dot.DOT_WIDTH > SCREEN_HEIGHT ) || checkCollision( dot.collider, wall ) )
+    {
+        //Move back
+        dot.mPosY -= dot.mVelY;
+        dot.collider.y = dot.mPosY;
+    }
+}
+*/
+
+void renderDot(dot_struct* d , SDL_Texture* texture)
+{
+    SDL_Rect proxy ;
+  //  SDL_Rect *ptr = &proxy;
+  /*  proxy.x = d.collider.x;
+    proxy.y = d.collider.y;
+    proxy.w = d.collider.w;
+    proxy.h = d.collider.h;
+*/
+
+    proxy.x = 50;
+    proxy.y = 60;
+    proxy.w = 960;
+    proxy.h =614;
+    render(d->mPosX,d->mPosY, d->collider , texture);
+
+}
+int checkCollision(SDL_Rect a, SDL_Rect b)
+{
+     //The sides of the rectangles
+    int leftA, leftB;
+    int rightA, rightB;
+    int topA, topB;
+    int bottomA, bottomB;
+
+    //Calculate the sides of rect A
+    leftA = a.x;
+    rightA = a.x + a.w;
+    topA = a.y;
+    bottomA = a.y + a.h;
+
+    //Calculate the sides of rect B
+    leftB = b.x;
+    rightB = b.x + b.w;
+    topB = b.y;
+    bottomB = b.y + b.h;
+
+    //If any of the sides from A are outside of B
+    if( bottomA <= topB )
+    {
+        return 0;
+    }
+
+    if( topA >= bottomB )
+    {
+        return 0;
+    }
+
+    if( rightA <= leftB )
+    {
+        return 0;
+    }
+
+    if( leftA >= rightB )
+    {
+        return 0;
+    }
+
+    //If none of the sides from A are outside B
+    return 1;
+}
 
 //Remember to allocate this to memory
 SDL_Rect* createGrid()
@@ -85,7 +196,7 @@ void debugging()
         scanf("%d", &i);
     }*/
 }
-
+/*
 void move(dot_struct *d)
 {
     d->mPosX += d->DOT_VEL ;
@@ -108,7 +219,7 @@ void move(dot_struct *d)
     }
 
 }
-
+*/
 SDL_Surface* loadSurface(char* path)
 {
     //Final Optimized Image
@@ -148,7 +259,7 @@ int loadImage()
     if(image == NULL)
     {
 
-        printf("Unable to load image %s! SDL Error:%s\n", "lena_grey.bmp",SDL_GetError());
+        printf("Unable to load image %s! SDL Error:%s\n", "sample.bmp",SDL_GetError());
         success = 0;
     }
 
@@ -329,15 +440,21 @@ void Initialize()
     int j =0;
     int i  = 0 ;
     SDL_Event e;
-
+    if(loadMedia()!= 1) printf("Could not load texture");
+     //Set the wall
+            SDL_Rect wall;
+            wall.x = 300;
+            wall.y = 40;
+            wall.w = 40;
+            wall.h = 400;
     //SDL_Color textColor = {0,0,0,255};
     //dot_struct d;
     //SDL_Rect camera = {0,0,SCREEN_HEIGHT,SCREEN_WIDTH};
 
-    gridToUse = createGrid();
-    if(gridToUse ==  NULL) printf("ERROR CREATING GRID");
+   // gridToUse = createGrid();
+   // if(gridToUse ==  NULL) printf("ERROR CREATING GRID");
     SetupWindow();
-    loadMedia();
+    //loadMedia();
 
     //Main Loop
     while( i == 0)
@@ -356,15 +473,17 @@ void Initialize()
 
 
         //This here is basically a double buffer
-
+       // moveDot(wall);
         //Clear Screen
+         SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
         SDL_RenderClear(renderer);
-        createMap();
+
+        //createMap();
           //SDL_RenderDrawRects(renderer , gridToUse,256) ;
 
         SDL_SetRenderDrawColor( renderer, 0, 0, 255, 255 );
-        SDL_RenderDrawRect(renderer,&gridToUse);
-
+        SDL_RenderDrawRect(renderer,&wall);
+        renderDot(dot,texture);
 
         //Render texture to screen
         //SDL_RenderCopy(renderer, texture,NULL,NULL);
@@ -435,6 +554,20 @@ void update(SDL_Surface* surf, SDL_Surface* dest,int x, int y)
     destR.y = y;
 
     SDL_BlitSurface(surf,NULL,dest,&destR);
+}
+
+void render(int x, int y , SDL_Rect * src,SDL_Texture* texture)
+{
+    SDL_Rect dest = {x,y,960 , 614};
+
+    /*if(src != NULL)
+    {
+
+        dest.w = src->w;
+        dest.h = src->h;
+    }
+*/
+    SDL_RenderCopy(renderer, texture,NULL, NULL);
 }
 
 

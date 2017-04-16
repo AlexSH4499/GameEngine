@@ -21,17 +21,23 @@ typedef struct dot{
      int DOT_WIDTH ;
      int DOT_HEIGHT ;
     int DOT_VEL ;
+    int mVelX;
+    int mVelY;
    int mPosX , mPosY;
+   SDL_Rect collider;
 }dot_struct;
 
-
+dot_struct initDot();
+//void moveDot(SDL_Rect &wall);
 int getDotPosX(dot_struct* d);
 int getDotPosY(dot_struct* d);
 
 void SetupWindow();
-void move(dot_struct* d);
+
 //void handleEvent(SDL_Event& e);
-void render(int camX , int camY);
+int checkCollision();
+SDL_Rect*createGrid();
+void render(int x, int y , SDL_Rect *src,SDL_Texture* texture);
 void Initialize();
 //void render();
 void update();
@@ -44,6 +50,7 @@ int loadImage();
 int loadMedia();
 void debugging();
 
+SDL_Surface* loadSurface(char* path);
 
 double Interpolate(double g , double c , double t);
 
